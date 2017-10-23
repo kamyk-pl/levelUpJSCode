@@ -12,28 +12,36 @@ var city2 = {
 var city3 = {
     uri: 'https://query.yahooapis.com/v1/public/yql?format=json&u=c&q=select%20*%20from%20weather.forecast%20where%20woeid=217211',
 }
+var city4 = {
+    uri: 'https://query.yahooapis.com/v1/public/yql?format=json&u=c&q=select%20*%20from%20weather.forecast%20where%20woeid=217203',
+}
 
-var callback1 = function (data) {
-        console.log("got data from 1st city ");           
-}
-var callback2 = function (data) {
-        console.log("got data from 2ndst city ");        
-}
-var callback3 = function (data) {
-        console.log("got data from 3rd city ");        
-}
+var callback1 = function (body) {
+
+    console.log("got data from 1st city ");
+    return  Promise.resolve();
+
+};
+var callback2 = function (body) {
+    console.log("got data from 2nd city ");
+    return  Promise.resolve();
+};
+var callback3 = function (body) {
+    console.log("got data from 3rd city ");
+    return  Promise.resolve();
+};
+var callback4 = function (body) {
+    console.log("got data from 4th city ");
+    return  Promise.resolve();
+};
+
 
 console.log("start");
-//var p1 = rp(options1).then(callback1).then(rp(options2)).then(callback2).then(rp(options3).then(callback3)).error(function(error){console.log});
-var p1 = rp(city1).then(callback1);
-var p2 = rp(city2).then(callback2);
-var p3 = rp(city3).then(callback3);
-
-Promise.all([p1,p2,p3]).then(function(){console.log("all done")
-});
-
-
-
-
-
-
+rp(city1)
+.then(callback1)
+.then(rp(city2))
+.then(callback2)
+.then(rp(city3))
+.then(callback3)
+.then(rp(city4))
+.then(callback4);
